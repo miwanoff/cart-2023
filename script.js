@@ -14,6 +14,23 @@ function count() {
   return count;
 }
 //count();
+function removeItem(minus) {
+  if (getCartData()) {
+    let cardData = getCartData();
+    let item = minus.getAttribute("data-id");
+    cardData[item][2] = cardData[item][2] - 1;
+    if (cardData[item][2] == 0) {
+      delete cardData[item];
+    }
+    setCartData(cardData);
+    let length = Object.getOwnPropertyNames(cardData);
+    if (length == 0) {
+      clearCart();
+    }
+    openCart();
+  }
+}
+
 // Записываем данные в LocalStorage
 function setCartData(o) {
   localStorage.setItem("cart", JSON.stringify(o));
